@@ -1,0 +1,12 @@
+
+### SIGNUP ###
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+   
+  "name": "Kayo Ceshar" ,
+  "email": "kayoceshar@gmail.com",
+  "password" :"kayo123",
+  "role": "ADMIN" 
+}
