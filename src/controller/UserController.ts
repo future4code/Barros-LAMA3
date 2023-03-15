@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { UserBusiness } from "../business/UserBusiness";
-import { UserInputDTO } from "../model/user";
+import { LoginDTO, UserInputDTO } from "../model/user";
 
 const userBusiness = new UserBusiness()
 
@@ -21,6 +21,21 @@ export class UserController {
       res.status(error.statusCode|| 400).send(error.message || error.sqlMessage)
       
     }
-
   }
+
+  login = async(req: Request, res: Response): Promise<void> => {
+    try {
+      const input: LoginDTO = {
+        email: req.body.email,
+        password: req.body.password
+      }
+
+      const token = await userBusiness.login(input)
+      res.status(200).send({message: "Logged in user!", acess_token:token})
+    } catch (error:any) {
+      res.status(error.statusCode|| 400).send(error.message || error.sqlMessage)
+    }
+  }
+
+
 }
