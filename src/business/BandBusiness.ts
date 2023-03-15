@@ -1,6 +1,6 @@
-import { MissingData, MusicNotFound, ResponsibleNotFound, TokenNotFound, Unauthorized } from "../error/bandErros";
+import { BandIdNotFound, BreackTime, EndTimeNotFound, EqualTime, ExistingShow, IncorrectDay, InvalidTime, MissingData, MusicNotFound, ResponsibleNotFound, ReverseTime, StartTimeNotFound, TokenNotFound, Unauthorized, WeekDayNotFound } from "../error/bandErros";
 import { NameNotFound } from "../error/userErros";
-import { band, BandInputDTO, FindBandDTO } from "../model/band";
+import { band, BandInputDTO, FindBandDTO, InputShowDayDTO, showDay } from "../model/band";
 import { UserRole } from "../model/user";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenGenerator } from "../services/TokenGenerator";
@@ -82,6 +82,90 @@ export class BandBusiness{
 
     } catch (error:any) {
       
+    }
+  }
+
+  addShowDay = async(input: InputShowDayDTO)=>{
+    try {
+      const {weekDay, startTime, endTime, bandId, token} = input   
+      if(!weekDay){
+        throw new WeekDayNotFound()
+      }
+
+      if(weekDay !== "sexta" && weekDay !== "sabado" && weekDay !== "domingo" ){
+        throw new IncorrectDay();
+        
+      }
+
+      if(!startTime){
+        throw new StartTimeNotFound()
+      }
+
+      if(Number(startTime) < 8 || Number(startTime) > 23){
+        throw new InvalidTime();  
+      }
+
+      if(Number(endTime) < 8 || Number(endTime) > 23){
+        throw new InvalidTime();  
+      }
+
+      if(Number(startTime) === Number(endTime) ){
+        throw new EqualTime();
+      }
+
+      if(Number (startTime) % 1 !== 0 || Number(endTime) % 1 !==0 ){
+        throw new BreackTime()
+      }
+
+      // if(Number(startTime) > Number (endTime) ){
+      //   throw new ReverseTime()
+      // }
+
+      if(!endTime){
+        throw new EndTimeNotFound()
+        
+      }
+
+      if(!bandId){
+        throw new BandIdNotFound()
+      }
+
+      if(!token){
+        throw new TokenNotFound()
+      }
+
+      const data = tokenGenerator.getToken(token)
+
+      if(!data.id){
+        throw new Unauthorized()
+      }
+
+      if(data.role.toUpperCase() !== UserRole.ADMIN){
+        throw new Unauthorized();
+      }
+
+      const allShow = await bandBaseDataBase.getAllShows()
+      const checkShow = allShow.find(show => show.week_day === input.weekDay)
+
+        
+        if(checkShow?.start_time === input.startTime && checkShow?.end_time <= input.endTime ){
+          throw new ExistingShow()
+        }
+
+      const id: string = idGenerator.generateId()
+
+      const showDay: showDay = {
+        id,
+        week_day: weekDay,
+        start_time: startTime,
+        end_time: endTime,
+        band_id: bandId
+      }
+
+      await bandBaseDataBase.addShowDay(showDay)
+
+    } catch (error: any) {
+      throw new CustomError(400, error.message);
     }
   }
 

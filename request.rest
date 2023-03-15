@@ -25,13 +25,13 @@ Content-Type: application/json
 
 ### Register ###
 POST http://localhost:3003/band/registerband
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgzNjI4MCwiZXhwIjoxNjc4ODM5ODgwfQ.OPMXFPmDlxd40OPQWMlpxw3pXapRwrQqHWiadCOYMGQ
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4ZmUwMDUyLTAyNDgtNDlmNC1iYzg3LTVhYzMxN2ExM2JjMCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODkwNjQ4MSwiZXhwIjoxNjc4OTEwMDgxfQ.q5HwfZ5QueQsiKYIddyoUjwPYEwr0ZSauIMyGDvGchk
 Content-Type: application/json
 
 {
-  "name": "CBJR_2",
-  "musicGenre": "Rock",
-  "responsible":"Champignhom"  
+  "name": "Raça Negra",
+  "musicGenre": "Pagode",
+  "responsible":"Luiz Carlos"  
 }
 
 
@@ -39,3 +39,14 @@ Content-Type: application/json
 GET http://localhost:3003/band/fe40df38-2f9a-4f5e-b34b-df469f2aaf26
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgzNjI4MCwiZXhwIjoxNjc4ODM5ODgwfQ.OPMXFPmDlxd40OPQWMlpxw3pXapRwrQqHWiadCOYMGQ
 
+### Add Show Day
+POST http://localhost:3003/band/addshowday
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4ZmUwMDUyLTAyNDgtNDlmNC1iYzg3LTVhYzMxN2ExM2JjMCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODkxNTg1NiwiZXhwIjoxNjc4OTE5NDU2fQ.rbX3feMmkwuW4a9kLF-eRd1z5yfevo0BiuLpVAZ0d-o
+Content-Type: application/json
+
+{
+  "weekDay": "sabado",
+  "startTime": 9,
+  "endTime": 13,
+  "bandId": "a3b18e10-5523-4031-b429-b2c8dff6b8da"
+}
