@@ -8,3 +8,4 @@ const bandController = new BandController()
 
 bandRouter.post('/registerband', bandController.registerBand)
 bandRouter.get('/:search', bandController.findBand)
+bandRouter.post('/addshowday', bandController.addShowDay)
