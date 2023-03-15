@@ -5,8 +5,37 @@ Content-Type: application/json
 
 {
    
-  "name": "Kayo Ceshar" ,
-  "email": "kayoceshar@gmail.com",
-  "password" :"kayo123",
-  "role": "ADMIN" 
+  "name": "Astolfo" ,
+  "email": "astolfo@gmail.com",
+  "password" :"astolfo123",
+  "role": "NORMAL" 
 }
+
+
+### Login ###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+  "email": "kayoceshar@gmail.com",
+  "password" :"kayo123"
+}
+
+
+
+### Register ###
+POST http://localhost:3003/band/registerband
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgzNjI4MCwiZXhwIjoxNjc4ODM5ODgwfQ.OPMXFPmDlxd40OPQWMlpxw3pXapRwrQqHWiadCOYMGQ
+Content-Type: application/json
+
+{
+  "name": "CBJR_2",
+  "musicGenre": "Rock",
+  "responsible":"Champignhom"  
+}
+
+
+### Search Band ###
+GET http://localhost:3003/band/fe40df38-2f9a-4f5e-b34b-df469f2aaf26
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODgzNjI4MCwiZXhwIjoxNjc4ODM5ODgwfQ.OPMXFPmDlxd40OPQWMlpxw3pXapRwrQqHWiadCOYMGQ
+

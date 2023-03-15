@@ -1,7 +1,7 @@
 import { UserBaseDataBase } from "../data/UserBaseDataBase";
 import { CustomError } from "../error/CustomError";
-import { EmailNotFound, InvalidEmail, InvalidPassWord, InvalidRole, NameNotFound, PassWordNotFound, RoleNotFound } from "../error/userErros";
-import { user, UserInputDTO, UserRole } from "../model/user";
+import { EmailNotFound, InvalidEmail, InvalidPassWord, InvalidRole, NameNotFound, PassWordNotFound, RepeatedEmail, RoleNotFound, UserNotFound } from "../error/userErros";
+import { LoginDTO, user, UserInputDTO, UserRole } from "../model/user";
 import { HashManager } from "../services/HashManager";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenGenerator } from "../services/TokenGenerator";
@@ -42,7 +42,14 @@ export class UserBusiness {
         if(role.toUpperCase() !==UserRole.ADMIN && role.toUpperCase() !== UserRole.NORMAL){
           throw new InvalidRole();
           
-        } 
+        }
+        
+        const allUsers = await userDataBase.getAllUsers()
+        const repeatedEmail = allUsers.find((user)=> {return user.email === email})
+
+        if(repeatedEmail) {
+          throw new RepeatedEmail()
+        }
 
         const id: string =  idGenerator.generateId()
         const hashPassword: string = await hashManager.hash(password);
@@ -63,4 +70,38 @@ export class UserBusiness {
       throw new CustomError(400, error.message); 
     }
   }
+
+  login = async(input:LoginDTO) => {
+    try {
+      const {email, password} = input
+
+      if(!email){
+        throw new EmailNotFound();
+      }
+
+      if(!password){
+        throw new PassWordNotFound();
+      }
+
+      const findUser = await userDataBase.getUserByEmail(email)
+          
+
+      if(!findUser) {
+        throw new UserNotFound()
+      }
+
+      const validPassword: boolean = await hashManager.compare(password, findUser.password)
+
+      if(!validPassword){
+        throw new InvalidPassWord()
+      }
+
+      const token = tokenGenerator.generationToken({id:findUser.id,role: findUser.role})
+      return token
+    } catch (error:any) {
+      throw new CustomError(400, error.message);
+    }
+  }
+
+
 }

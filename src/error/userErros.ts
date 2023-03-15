@@ -41,3 +41,21 @@ export class InvalidRole extends CustomError{
       super(406, "Role is required. ADMIN OR NORMAL.")
   }
 }
+
+export class RepeatedEmail extends CustomError{
+  constructor(){
+      super(400, "This email account already exists")
+  }
+}
+
+export class UserNotFound extends CustomError{
+  constructor(){
+      super(404, "User does not exist.")
+  }
+}
+
+export class InvalidPassword extends CustomError{
+  constructor(){
+      super(400, "Invalid password.")
+  }
+}
