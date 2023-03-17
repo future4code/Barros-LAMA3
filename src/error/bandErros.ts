@@ -56,6 +56,13 @@ export class BandIdNotFound extends CustomError{
   }
 }
 
+export class NonexistentBand extends CustomError{
+  constructor(){
+      super(404, "is required for a valid band id.")
+  }
+}
+
+
 export class IncorrectDay extends CustomError{
   constructor(){
       super(404, "Incorrect Day, choose day sexta, sabado or domingo")

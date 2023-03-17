@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { BandBusiness } from "../business/BandBusiness";
 import { UserBusiness } from "../business/UserBusiness";
-import { BandInputDTO, FindBandDTO, InputShowDayDTO } from "../model/band";
+import { BandInputDTO, FindBandDTO, InputpurchaseDTO, InputShowDayDTO, ticketInputDTO } from "../model/band";
 
 const bandBusiness = new BandBusiness()
 
@@ -31,6 +31,8 @@ export class BandController {
                 token: req.headers.authorization as string 
             }
 
+            console.log(input);
+            
             const result = await bandBusiness.findBand(input)
 
             res.status(201).send(result)
@@ -50,13 +52,67 @@ export class BandController {
                 token: req.headers.authorization as string 
             }
 
+
+
             await bandBusiness.addShowDay(input)
             res.status(200).send({ message: "Show Added Successfully" })
 
         } catch (error: any) {
             res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
         }
+    }
 
-}
+    getShowByDay = async(req: Request, res: Response)=>{
+        try {
+             const day = req.params.day
+
+             console.log(day)
+
+            const result = await bandBusiness.getShowByDay(day)
+            res.status(201).send(result)
+
+        } catch (error: any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
+    createTicket = async(req: Request, res: Response):Promise<void> => {
+        try {
+            const input: ticketInputDTO = {
+                name:req.body.name,
+                value:req.body.value,
+                eventId:req.body.eventId,
+                qtyStock:req.body.qtyStock,
+                token: req.headers.authorization as string 
+            }
+
+            await bandBusiness.createTicket(input)
+
+            res.status(201).send({message: "Ticket created!"})
+
+        } catch (error:any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
+    ticketSale = async(req: Request, res: Response):Promise<void> => {
+        try {
+            const input: InputpurchaseDTO = {
+                id:req.params.id as string,
+                qty:req.body.qty,
+                token: req.headers.authorization as string 
+            }
+                       
+
+            await bandBusiness.ticketSale(input)
+
+            res.status(201).send({message: "Ticket created!"})
+
+        } catch (error:any) {
+            res.status(error.statusCode || 400).send(error.message || error.sqlMessage)
+        }
+    }
+
+
 
 }

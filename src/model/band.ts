@@ -32,3 +32,32 @@ export interface InputShowDayDTO {
   bandId: string,
   token: string
 }
+
+
+export interface ticket {
+  id: string,
+  name: string,
+  value: number,
+  event_id: string,
+  qty_stock:number
+}
+
+export interface ticketInputDTO {
+  name: string,
+  value: number,
+  eventId: string,
+  qtyStock:number,
+  token: string
+}
+
+export interface purchase {
+  eventId: string,
+  updateStock:number
+}
+
+export interface InputpurchaseDTO {
+  id: string,
+  qty:number,
+  token
+}
+
