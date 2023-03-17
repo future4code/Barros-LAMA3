@@ -1,11 +1,12 @@
-import { BandIdNotFound, BreackTime, EndTimeNotFound, EqualTime, ExistingShow, IncorrectDay, InvalidTime, MissingData, MusicNotFound, ResponsibleNotFound, ReverseTime, StartTimeNotFound, TokenNotFound, Unauthorized, WeekDayNotFound } from "../error/bandErros";
+import { BandIdNotFound, BreackTime, EndTimeNotFound, EqualTime, ExistingShow, IncorrectDay, InvalidTime, MissingData, MusicNotFound, NonexistentBand, ResponsibleNotFound, ReverseTime, StartTimeNotFound, TokenNotFound, Unauthorized, WeekDayNotFound } from "../error/bandErros";
 import { NameNotFound } from "../error/userErros";
-import { band, BandInputDTO, FindBandDTO, InputShowDayDTO, showDay } from "../model/band";
+import { band, BandInputDTO, FindBandDTO, InputpurchaseDTO, InputShowDayDTO, purchase, showDay, ticket, ticketInputDTO } from "../model/band";
 import { UserRole } from "../model/user";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenGenerator } from "../services/TokenGenerator";
 import {BandBaseDataBase} from '../data/BandBaseDataBase'
 import { CustomError } from "../error/CustomError";
+
 
 const tokenGenerator = new TokenGenerator()
 const idGenerator = new IdGenerator()
@@ -92,7 +93,7 @@ export class BandBusiness{
         throw new WeekDayNotFound()
       }
 
-      if(weekDay !== "sexta" && weekDay !== "sabado" && weekDay !== "domingo" ){
+      if(weekDay.toUpperCase() !== "SEXTA" && weekDay.toUpperCase() !== "SÁBADO" && weekDay.toUpperCase() !== "DOMINGO" ){
         throw new IncorrectDay();
         
       }
@@ -111,15 +112,18 @@ export class BandBusiness{
 
       if(Number(startTime) === Number(endTime) ){
         throw new EqualTime();
-      }
+      }      
 
-      if(Number (startTime) % 1 !== 0 || Number(endTime) % 1 !==0 ){
+      if(!Number.isInteger(startTime) || !Number.isInteger(endTime)){
         throw new BreackTime()
       }
 
-      // if(Number(startTime) > Number (endTime) ){
-      //   throw new ReverseTime()
-      // }
+
+
+
+      if(Number(startTime) > Number (endTime) ){
+        throw new ReverseTime()
+      }
 
       if(!endTime){
         throw new EndTimeNotFound()
@@ -145,12 +149,20 @@ export class BandBusiness{
       }
 
       const allShow = await bandBaseDataBase.getAllShows()
-      const checkShow = allShow.find(show => show.week_day === input.weekDay)
+      const checkShow = allShow.find(show => show.week_day === input.weekDay)     
 
-        
-        if(checkShow?.start_time === input.startTime && checkShow?.end_time <= input.endTime ){
+
+      if(checkShow?.start_time === input.startTime || checkShow?.end_time === input.endTime ){
           throw new ExistingShow()
-        }
+      }
+
+
+       const allBands = await bandBaseDataBase.getAllBands()
+       const checkBand = allBands.find(bands => bands.id === input.bandId) 
+
+       if(!checkBand){
+        throw new NonexistentBand()
+       }      
 
       const id: string = idGenerator.generateId()
 
@@ -169,8 +181,69 @@ export class BandBusiness{
     }
   }
 
+  getShowByDay = async(day:string) =>{
+    try {
+      
+      const result = await bandBaseDataBase.getShowByDay(day)
+      return result      
+      
+    } catch (error:any) {
+      throw new CustomError(400, error.message);
+    }
+  }
+
+  createTicket = async(input: ticketInputDTO ) =>{
+    try {
+      const {name, value,eventId,qtyStock,token} = input    
+
+      const id: string = idGenerator.generateId()
+
+      const ticket: ticket = {
+        id,
+        name,
+        value,
+        event_id: eventId,
+        qty_stock: qtyStock
+      }
+
+      await bandBaseDataBase.createTicket(ticket)
+
+      const data = tokenGenerator.getToken(token)
+      
+    } catch (error:any) {
+      throw new CustomError(400, error.message);
+    }
+  }
+
+
+  ticketSale = async(input:InputpurchaseDTO) =>{
+    try {
+      const {id,qty,token} = input    
+
+      
+
+      const stock = await bandBaseDataBase.getStock(id)
+
+
+      const updateStock = stock.qty_stock - qty
+      
+      
+      await bandBaseDataBase.updateTicket(id, updateStock)
+      
+
+      const data = tokenGenerator.getToken(token)
+      
+    } catch (error:any) {
+      throw new CustomError(400, error.message);
+    }
+  }
+
+
+
 
 
 
 }
+
+
 

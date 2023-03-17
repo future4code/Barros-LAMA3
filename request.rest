@@ -41,12 +41,42 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQt
 
 ### Add Show Day
 POST http://localhost:3003/band/addshowday
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjA4ZmUwMDUyLTAyNDgtNDlmNC1iYzg3LTVhYzMxN2ExM2JjMCIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3ODkxNTg1NiwiZXhwIjoxNjc4OTE5NDU2fQ.rbX3feMmkwuW4a9kLF-eRd1z5yfevo0BiuLpVAZ0d-o
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTAwMTEyMCwiZXhwIjoxNjc5MDA0NzIwfQ.FvXpOYrEQ3lvyogd1INSPyrYvvYOi2kEFdbHJAoWpdI
 Content-Type: application/json
 
 {
-  "weekDay": "sabado",
-  "startTime": 9,
-  "endTime": 13,
-  "bandId": "a3b18e10-5523-4031-b429-b2c8dff6b8da"
+  "weekDay": "Sexta",
+  "startTime": 15,
+  "endTime": 19,
+  "bandId": "c155afe2-5241-498e-bd77-c8e358ee6512"
+}
+
+
+
+
+### day ###
+GET http://localhost:3003/band/showsday/sexta
+
+
+### create ticket
+POST http://localhost:3003/band/createticket
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTAwNTc3OSwiZXhwIjoxNjc5MDA5Mzc5fQ.tsf98cEYhuHKJULY0qIu-E5nUZBUvLJ9Cqa1CBQSGN0
+Content-Type: application/json
+
+{
+  "name": "Show da banda Capital Inicial",
+  "value": 50,
+  "eventId": "15f493c6-fa2d-45ea-9521-4aa980e31149",
+  "qtyStock":500
+}
+
+
+
+############ sale
+POST http://localhost:3003/band/ticketsale/15f493c6-fa2d-45ea-9521-4aa980e31149
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTAxMzgwOSwiZXhwIjoxNjc5MDE3NDA5fQ.8m9dx1jrRLGKkxLJ_z6M4uR4ReYmQ52ktwL-0iI28Z4
+Content-Type: application/json
+
+{
+   "qty":5
 }
