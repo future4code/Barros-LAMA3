@@ -8,7 +8,7 @@ Link Documentação:
  
  ## 🧩 Proposta do Projeto
 Projeto desenvolvido no BootCamp Labenu: O **LAMA**, *Labenu Musical Awards*, é um pequeno projeto com a proposta de gerar funcionalidades de BackEnd 
-para festivaais que terão duração fixa de 3 dias (sexta, sábado e domingo), começando sempre as 08h e acabando as 23h, totalizando 15h de show a cada dia. 
+para festivaais musicais que terão duração fixa de 3 dias (sexta, sábado e domingo), começando sempre as 08h e acabando as 23h, totalizando 15h de show a cada dia. 
 
 As funcionalidades básicas do projeto devem ser:
 
