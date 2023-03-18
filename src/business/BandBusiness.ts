@@ -1,4 +1,4 @@
-import { BandIdNotFound, BreackTime, DayNotFound, EndTimeNotFound, EqualTime, EventIdNotFound, ExistingBand, ExistingShow, IncorrectDay, InvalidEvent, InvalidTime, LinkPhotoNotFound, MissingData, MusicNotFound, NonexistentBand, QtyBigger, QtyNotFound, QtyStockNotFound, ResponsibleNotFound, ReverseTime, StartTimeNotFound, TokenNotFound, Unauthorized, ValueNotFound, WeekDayNotFound } from "../error/bandErros";
+import { BandIdNotFound, BreackTime, DayNotFound, EndTimeNotFound, EqualTime, EventIdNotFound, ExistingBand, ExistingShow, IncorrectDay, InvalidEvent, InvalidNumber, InvalidTime, LinkPhotoNotFound, MissingData, MusicNotFound, NonexistentBand, QtyBigger, QtyNotFound, QtyStockNotFound, ResponsibleNotFound, ReverseTime, StartTimeNotFound, TokenNotFound, Unauthorized, ValueNotFound, WeekDayNotFound } from "../error/bandErros";
 import { NameNotFound } from "../error/userErros";
 import { band, BandInputDTO, FindBandDTO, InputGalleryDTO, InputphotoDTO, InputpurchaseDTO, InputSearchShowDayDTO, InputShowDayDTO, OutputGalleryDTO, OutputShowDayDTO, Photo, Sale, showDay, Ticket,TicketInputDTO} from "../model/band";
 import { UserRole } from "../model/user";
@@ -127,6 +127,10 @@ export class BandBusiness{
 
       if(Number(startTime) > Number (endTime) ){
         throw new ReverseTime()
+      }
+
+      if(Number(startTime) < 0 || Number(endTime) < 0){
+        throw new InvalidNumber()
       }
 
       if(!endTime){
@@ -294,6 +298,14 @@ export class BandBusiness{
 
       if(!qty){
         throw new QtyNotFound();
+      }
+
+      if(qty < 0){
+        throw new InvalidNumber()
+      }
+
+      if(!Number.isInteger(qty)){
+        throw new BreackTime()
       }
       
       if(!token){
