@@ -2,9 +2,9 @@
 ![image](https://user-images.githubusercontent.com/102332717/226071435-d924044f-3efe-4f14-b054-88cd4b7e2486.png)
 
 
-Link Render:
+Link Render: https://lama3-barros.onrender.com/
 <br>
-Link Documentação: 
+Link Documentação: https://documenter.getpostman.com/view/22376814/2s93JzLfhf
  
  ## 🧩 Proposta do Projeto
 Projeto desenvolvido no BootCamp Labenu: O **LAMA**, *Labenu Musical Awards*, é um pequeno projeto com a proposta de gerar funcionalidades de BackEnd 
