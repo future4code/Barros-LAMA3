@@ -71,7 +71,7 @@ export class UserBusiness {
     }
   }
 
-  login = async(input:LoginDTO) => {
+  login = async(input:LoginDTO):Promise<string> => {
     try {
       const {email, password} = input
 

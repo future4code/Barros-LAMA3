@@ -33,8 +33,21 @@ export interface InputShowDayDTO {
   token: string
 }
 
+export interface OutputShowDayDTO {
+  name: string,
+  musicGenre: string,
+  weekDay: string,
+  startTime: number,
+  endTime: number  
+}
 
-export interface ticket {
+export interface OutputGalleryDTO {
+  linkPhoto: string  
+}
+
+
+
+export interface Ticket {
   id: string,
   name: string,
   value: number,
@@ -42,7 +55,7 @@ export interface ticket {
   qty_stock:number
 }
 
-export interface ticketInputDTO {
+export interface TicketInputDTO {
   name: string,
   value: number,
   eventId: string,
@@ -50,10 +63,17 @@ export interface ticketInputDTO {
   token: string
 }
 
-export interface purchase {
+export interface Purchase {
   eventId: string,
   updateStock:number
 }
+
+export interface Sale {
+  id:string,
+  updateStock:number,
+  updateSold:number
+}
+
 
 export interface InputpurchaseDTO {
   id: string,
@@ -61,3 +81,25 @@ export interface InputpurchaseDTO {
   token
 }
 
+  
+  export interface Photo {
+    id: string,
+    link_photo: string,
+    event_id:string,
+  }
+  
+  export interface InputphotoDTO {
+    linkPhoto: string,
+    eventId:string,
+    token: string
+  }
+
+  export interface InputGalleryDTO {
+    id:string,
+    token: string
+  }
+
+  export interface InputSearchShowDayDTO {
+    day:string,
+    token: string
+  }
