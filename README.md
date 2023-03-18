@@ -26,7 +26,7 @@ As funcionalidades básicas do projeto devem ser:
 
 5. ### 🎵 Endpoint de adicionar um show a um dia
 > Para cadastrar um show, o endpoint precisa do id da banda, o dia (sexta, sábado ou domingo) e o horário em que ela irá se apresentar. Deve haver uma validação para indicar se o horário é válido (ou seja, se está entre 08h e 23h). Além disso os shows só podem ser marcados em horários redondos, ou seja, pode ser 08h - 09h ou 09h - 13h mas não pode ser 09h - 10h30 ou 10h30 - 14h.
->Caso já exista um show marcado para o dia e o horário em questão, o seu endpoint deve retornar um erro. (opcional) Caso tenha interesse, Faça ao menos dois testes para checar se os dados estão corretos, sendo um em caso de erro e outro em caso de show em data repetida.
+>Caso já exista um show marcado para o dia e o horário em questão, o seu endpoint deve retornar um erro.
 
 6. ### 🎵 Endpoint de pegar todos os shows de uma data
 > Recebe um dia (sexta, sábado ou domingo) e retorna todos os shows daquela data (ordenados pelo horário), mostrando somente o nome da banda e o gênero musical principal.
