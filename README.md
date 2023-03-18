@@ -60,8 +60,18 @@ As funcionalidades básicas do projeto devem ser:
 
 
 
-Autores:
+
+
+![image](https://user-images.githubusercontent.com/102332717/226074388-1396a6a8-e277-4fc0-98db-bc45366a01ca.png)
+### Autores:
+Kayo Ceshar
+<br/> 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+)](https://www.linkedin.com/in/kayo-ceshar/)
+
+<br/> 
+ 
+Felipe Alcantara
 <br/>
-Kayo Ceshar: https://www.linkedin.com/in/kayo-ceshar/
-<br>
-Felipe Alcantara:https://www.linkedin.com/in/fmalcantara/
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+)](https://www.linkedin.com/in/fmalcantara/)
