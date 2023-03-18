@@ -64,9 +64,6 @@ As funcionalidades básicas do projeto devem ser:
 ### Autores:
 
 [![LinkedIn](https://img.shields.io/badge/Kayo_Ceshar-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
-)](https://www.linkedin.com/in/kayo-ceshar/)
-
-<br/>
-
+)](https://www.linkedin.com/in/kayo-ceshar/)<br/>
 [![LinkedIn](https://img.shields.io/badge/Felipe_Alcantara-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 )](https://www.linkedin.com/in/fmalcantara/)
