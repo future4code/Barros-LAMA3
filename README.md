@@ -46,17 +46,15 @@ As funcionalidades básicas do projeto devem ser:
 10. ### 🎵 Pegar todas as fotos
 > O endpoint receberá o identificador do evento e devolverá todas as fotos deste.
 
-### Tecnologias Utilizadas:
-![image](https://user-images.githubusercontent.com/102332717/226071435-d924044f-3efe-4f14-b054-88cd4b7e2486.png)
-
-  ⚡️TypeScript <br/>
-  ⚡️Node.Js <br/>
-  ⚡️Express.js <br/>
-  ⚡️Knex <br/>
-  ⚡️Bcrypt <br/>
-  ⚡️MySQL <br/>
-
-   🌪️ Para Rodar o projeto foi utilizado a biblioteca NPM install.
+### 🛠️ Tecnologias Utilizadas:
+<img Aling="center" height="30" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"/>Node.Js<br/>
+<img Aling="center" height="30" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"/>Express<br/>
+<img Aling="center" height="30" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"/>TypeScript<br/>
+<img Aling="center" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg"/>MySqL<br/>
+🔆Knex <br/>
+<img Aling="center" height="30" src="https://bcrypt.online/images/bcrypt-esse-tools-logo-square.svg"/>BCrypt<br/>
+ 
+🌪️ Para Rodar o projeto foi utilizado a biblioteca NPM install.
 
 
 
