@@ -1,6 +1,6 @@
-import { BandIdNotFound, BreackTime, EndTimeNotFound, EqualTime, ExistingShow, IncorrectDay, InvalidTime, MissingData, MusicNotFound, NonexistentBand, ResponsibleNotFound, ReverseTime, StartTimeNotFound, TokenNotFound, Unauthorized, WeekDayNotFound } from "../error/bandErros";
+import { BandIdNotFound, BreackTime, DayNotFound, EndTimeNotFound, EqualTime, EventIdNotFound, ExistingBand, ExistingShow, IncorrectDay, InvalidEvent, InvalidTime, LinkPhotoNotFound, MissingData, MusicNotFound, NonexistentBand, QtyBigger, QtyNotFound, QtyStockNotFound, ResponsibleNotFound, ReverseTime, StartTimeNotFound, TokenNotFound, Unauthorized, ValueNotFound, WeekDayNotFound } from "../error/bandErros";
 import { NameNotFound } from "../error/userErros";
-import { band, BandInputDTO, FindBandDTO, InputpurchaseDTO, InputShowDayDTO, purchase, showDay, ticket, ticketInputDTO } from "../model/band";
+import { band, BandInputDTO, FindBandDTO, InputGalleryDTO, InputphotoDTO, InputpurchaseDTO, InputSearchShowDayDTO, InputShowDayDTO, OutputGalleryDTO, OutputShowDayDTO, Photo, Sale, showDay, Ticket,TicketInputDTO} from "../model/band";
 import { UserRole } from "../model/user";
 import { IdGenerator } from "../services/IdGenerator";
 import { TokenGenerator } from "../services/TokenGenerator";
@@ -44,6 +44,14 @@ export class BandBusiness{
         throw new Unauthorized()
       }
 
+      const getAllBands = await bandBaseDataBase.getAllBands()
+      const checkName = getAllBands.find(band => band.name === input.name)
+         
+
+      if(checkName) {
+        throw new ExistingBand()
+      }
+
       const id:string = idGenerator.generateId()
 
       const band: band = {
@@ -59,7 +67,7 @@ export class BandBusiness{
     }
   }
 
-  findBand = async (input: FindBandDTO) => {
+  findBand = async (input: FindBandDTO): Promise<band[]> => {
     try {
         const {search, token} = input
 
@@ -75,14 +83,13 @@ export class BandBusiness{
 
       if (!data.id) {
         throw new Unauthorized();
-    }
+      }
 
     const result = await bandBaseDataBase.findBand(search)
     return result
 
-
     } catch (error:any) {
-      
+      throw new CustomError(400, error.message);
     }
   }
 
@@ -117,9 +124,6 @@ export class BandBusiness{
       if(!Number.isInteger(startTime) || !Number.isInteger(endTime)){
         throw new BreackTime()
       }
-
-
-
 
       if(Number(startTime) > Number (endTime) ){
         throw new ReverseTime()
@@ -181,24 +185,88 @@ export class BandBusiness{
     }
   }
 
-  getShowByDay = async(day:string) =>{
-    try {
+  getShowByDay = async(input: InputSearchShowDayDTO) =>{
+    try { 
+      const {day,token} = input
       
-      const result = await bandBaseDataBase.getShowByDay(day)
-      return result      
+      if(!day){
+        throw new DayNotFound()
+      }
+
+      if(!token){
+        throw new TokenNotFound()
+    }
+      
+      const data = tokenGenerator.getToken(token)
+
+      if(!data.id){
+        throw new Unauthorized()
+      }
+
+      const result = await bandBaseDataBase.getShowByDay(input.day)
+      
+      const resultOutput: OutputShowDayDTO[] = result.map((p) => {
+        return {
+          name: p.name,
+          musicGenre: p.music_genre,
+          weekDay: p.week_day,
+          startTime: p.start_time,
+          endTime: p.end_time
+        }
+    })
+
+    return resultOutput
       
     } catch (error:any) {
       throw new CustomError(400, error.message);
     }
   }
 
-  createTicket = async(input: ticketInputDTO ) =>{
+  createTicket = async(input: TicketInputDTO ) =>{
     try {
-      const {name, value,eventId,qtyStock,token} = input    
+      const {name, value,eventId,qtyStock,token} = input 
+      
+      if(!name){
+        throw new NameNotFound();
+      }
+
+      if(!value){
+        throw new ValueNotFound();
+      }
+
+      if(!eventId){
+        throw new EventIdNotFound();
+      }
+
+      if(!qtyStock){
+        throw new QtyStockNotFound();
+      }
+
+      if(!token){
+        throw new TokenNotFound();
+      }
+
+      const data = tokenGenerator.getToken(token)
+
+      if (!data.id) {
+        throw new Unauthorized();
+      }
+
+      if(data.role.toUpperCase() !== UserRole.ADMIN) {
+        throw new Unauthorized()
+      }
+
+      const allEvents = await bandBaseDataBase.getAllShows()
+      const checkEvent = allEvents.find(event => event.id === eventId)
+
+      if(!checkEvent){
+        throw new InvalidEvent()
+        
+      } 
 
       const id: string = idGenerator.generateId()
 
-      const ticket: ticket = {
+      const ticket: Ticket = {
         id,
         name,
         value,
@@ -208,7 +276,7 @@ export class BandBusiness{
 
       await bandBaseDataBase.createTicket(ticket)
 
-      const data = tokenGenerator.getToken(token)
+      
       
     } catch (error:any) {
       throw new CustomError(400, error.message);
@@ -218,30 +286,128 @@ export class BandBusiness{
 
   ticketSale = async(input:InputpurchaseDTO) =>{
     try {
-      const {id,qty,token} = input    
+      const {id,qty,token} = input 
 
+      if(!id){
+        throw new EventIdNotFound();
+      }
+
+      if(!qty){
+        throw new QtyNotFound();
+      }
       
+      if(!token){
+        throw new TokenNotFound();
+      }
+      
+      const data = tokenGenerator.getToken(token)
 
+      if (!data.id) {
+        throw new Unauthorized();
+      }
+      
       const stock = await bandBaseDataBase.getStock(id)
 
 
-      const updateStock = stock.qty_stock - qty
-      
-      
-      await bandBaseDataBase.updateTicket(id, updateStock)
-      
+      const updateStock = stock.qty_stock - qty 
+      const updateSold = stock.sold + qty 
 
-      const data = tokenGenerator.getToken(token)
+      if(qty> stock.qty_stock){
+        throw new QtyBigger()
+      }
+
+      const sale:Sale = {
+        id,
+        updateStock,
+        updateSold
+      }
       
+      
+      await bandBaseDataBase.updateTicket(sale) 
+
     } catch (error:any) {
       throw new CustomError(400, error.message);
     }
   }
 
 
+  addPhoto = async(input: InputphotoDTO ) =>{
+    try {
+      const {linkPhoto,eventId,token} = input
+      
+      if(!eventId){
+        throw new EventIdNotFound();
+      }
 
+      if(!linkPhoto){
+        throw new LinkPhotoNotFound();
+      }
 
+      if(!token){
+        throw new TokenNotFound();
+      }
 
+      const data = tokenGenerator.getToken(token)
+
+      if (!data.id) {
+        throw new Unauthorized();
+      }
+      
+      const allEvents = await bandBaseDataBase.getAllShows()
+      const checkEvent = allEvents.find(event => event.id === eventId)
+
+      if(!checkEvent){
+        throw new InvalidEvent()
+        
+      } 
+
+      const id: string = idGenerator.generateId()
+
+      const photo: Photo = {
+        id,
+        link_photo: linkPhoto,
+        event_id: eventId        
+      }
+
+      await bandBaseDataBase.addPhoto(photo)
+      
+      
+    } catch (error:any) {
+      throw new CustomError(400, error.message);
+    }
+  }
+
+  getGalleryById = async(input: InputGalleryDTO) =>{
+    try {
+      const {id,token} = input
+
+      if(!id){
+        throw new EventIdNotFound();
+      }
+            
+      if(!token){
+        throw new TokenNotFound();
+      }
+      
+      const data = tokenGenerator.getToken(token)
+
+      if (!data.id) {
+        throw new Unauthorized();
+      }    
+            
+      const result = await bandBaseDataBase.getGalleryById(id)
+      const resultOutput: OutputGalleryDTO[] = result.map((p) => {
+        return {
+          linkPhoto: p.link_photo
+        }
+    })
+
+    return resultOutput           
+      
+    } catch (error:any) {
+      throw new CustomError(400, error.message);
+    }
+  }
 
 }
 

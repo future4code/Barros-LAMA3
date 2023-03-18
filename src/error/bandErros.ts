@@ -7,6 +7,32 @@ export class MusicNotFound extends CustomError{
   }
 }
 
+export class DayNotFound extends CustomError{
+  constructor(){
+      super(404, "Event day is required.")
+  }
+}
+
+export class ValueNotFound extends CustomError{
+  constructor(){
+      super(404, "Value is required.")
+  }
+}
+
+export class EventIdNotFound extends CustomError{
+  constructor(){
+      super(404, "Event id is required.")
+  }
+}
+
+export class QtyStockNotFound extends CustomError{
+  constructor(){
+      super(404, "Stock quantity is required.")
+  }
+}
+
+
+
 export class ResponsibleNotFound extends CustomError{
   constructor(){
       super(404, "Responsible is required.")
@@ -22,6 +48,24 @@ export class TokenNotFound extends CustomError{
 export class MissingData extends CustomError{
   constructor(){
       super(406, "Id or Band name is required.")
+  }
+}
+
+export class QtyNotFound extends CustomError{
+  constructor(){
+      super(406, "Amount of ticket is required.")
+  }
+}
+
+export class LinkPhotoNotFound extends CustomError{
+  constructor(){
+      super(406, "Link Photo is required.")
+  }
+}
+
+export class QtyBigger extends CustomError{
+  constructor(){
+      super(406, "The Quantity you want to buy is greater than the stock.")
   }
 }
 
@@ -62,6 +106,12 @@ export class NonexistentBand extends CustomError{
   }
 }
 
+export class InvalidEvent extends CustomError{
+  constructor(){
+      super(400, "Event id not found.")
+  }
+}
+
 
 export class IncorrectDay extends CustomError{
   constructor(){
@@ -97,6 +147,12 @@ export class ReverseTime extends CustomError{
 export class ExistingShow extends CustomError{
   constructor(){
       super(404, " Already existing show ")
+  }
+}
+
+export class ExistingBand extends CustomError{
+  constructor(){
+      super(404, " Band name already registered.")
   }
 }
 
