@@ -1,9 +1,9 @@
 import { CustomError } from "../error/CustomError";
 import { user } from "../model/user";
-import { BaseDataBase } from "./BaseDatabase";
+import { BaseDatabase} from "./BaseDataBase";
 
 
-export class UserBaseDataBase extends BaseDataBase{
+export class UserBaseDataBase extends BaseDatabase{
   private userTable = "TABELA_USUARIOS"
 
   signup = async(user: user): Promise<void> =>{

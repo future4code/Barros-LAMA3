@@ -1,8 +1,8 @@
 import { band, Photo, Sale, showDay, Ticket} from "../model/band";
-import { BaseDataBase } from "./BaseDatabase";
+import { BaseDatabase} from "./BaseDataBase";
 import { CustomError } from "../error/CustomError";
 
-export class BandBaseDataBase extends BaseDataBase{
+export class BandBaseDataBase extends BaseDatabase{
     private bandTable = 'TABELA_BANDAS'
     private showTable = 'TABELA_SHOWS'
     private ticketTable = 'TABELA_INGRESSOS'
