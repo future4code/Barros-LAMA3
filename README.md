@@ -64,14 +64,11 @@ As funcionalidades básicas do projeto devem ser:
 
 ![image](https://user-images.githubusercontent.com/102332717/226074388-1396a6a8-e277-4fc0-98db-bc45366a01ca.png)
 ### Autores:
-Kayo Ceshar
-<br/> 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+
+[![LinkedIn](https://img.shields.io/badge/Kayo_Ceshar-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 )](https://www.linkedin.com/in/kayo-ceshar/)
 
-<br/> 
- 
-Felipe Alcantara
 <br/>
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
+
+[![LinkedIn](https://img.shields.io/badge/Felipe_Alcantara-0077B5?style=for-the-badge&logo=linkedin&logoColor=white
 )](https://www.linkedin.com/in/fmalcantara/)
