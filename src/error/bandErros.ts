@@ -69,6 +69,12 @@ export class QtyBigger extends CustomError{
   }
 }
 
+export class InvalidNumber extends CustomError{
+  constructor(){
+      super(406, "The value cannot be negative.")
+  }
+}
+
 
 export class Unauthorized extends CustomError{
   constructor(){
