@@ -47,12 +47,12 @@ As funcionalidades básicas do projeto devem ser:
 > O endpoint receberá o identificador do evento e devolverá todas as fotos deste.
 
 ### 🛠️ Tecnologias Utilizadas:
-<img Aling="center" height="30" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"/>Node.Js<br/>
-<img Aling="center" height="30" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"/>Express<br/>
-<img Aling="center" height="30" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"/>TypeScript<br/>
-<img Aling="center" height="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original-wordmark.svg"/>MySqL<br/>
- 🔆Knex <br/>
- <img Aling="center" height="30" src="https://bcrypt.online/images/bcrypt-esse-tools-logo-square.svg"/>BCrypt<br/>
+<img Aling="center" height="20" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg"/>Node.Js<br/>
+<img Aling="center" height="20" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg"/>Express<br/>
+<img Aling="center" height="20" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg"/>TypeScript<br/>
+<img Aling="center" height="20" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg"/>MySqL<br/>
+<img Aling="center" height="20" src="https://knexjs.org/knex-logo.png"/>Knex <br/>
+<img Aling="center" height="20" src="https://bcrypt.online/images/bcrypt-esse-tools-logo-square.svg"/>BCrypt<br/>
  
 🌪️ Para Rodar o projeto foi utilizado a biblioteca NPM install.
 
