@@ -78,7 +78,7 @@ export interface Sale {
 export interface InputpurchaseDTO {
   id: string,
   qty:number,
-  token
+  token:string
 }
 
   
