@@ -1,0 +1,96 @@
+
+### SIGNUP ###
+POST http://localhost:3003/user/signup
+Content-Type: application/json
+
+{
+   
+  "name": "Astrodev" ,
+  "email": "astrodev@gmail.com",
+  "password" :"astrodev123",
+  "role": "NORMAL" 
+}
+
+
+### Login ###
+POST http://localhost:3003/user/login
+Content-Type: application/json
+
+{
+  "email": "kayoceshar@gmail.com",
+  "password" :"kayo123"
+}
+
+
+### Register ###
+POST http://localhost:3003/band/registerband
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTEwNTcwOCwiZXhwIjoxNjc5MTA5MzA4fQ.hwepBBMJj11ccLkA6U4S9VK2FqDqj3BH3jWhRP6udic
+Content-Type: application/json
+
+{
+  "name": "Raça Negra",
+  "musicGenre": "Pagode",
+  "responsible":"Luiz Carlos"  
+}
+
+
+### Search Band ###
+GET http://localhost:3003/band/fe40df38-2f9a-4f5e-b34b-df469f2aaf26
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTEwNTcwOCwiZXhwIjoxNjc5MTA5MzA4fQ.hwepBBMJj11ccLkA6U4S9VK2FqDqj3BH3jWhRP6udic
+
+### Add Show Day
+POST http://localhost:3003/band/addshowday
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTEwNTcwOCwiZXhwIjoxNjc5MTA5MzA4fQ.hwepBBMJj11ccLkA6U4S9VK2FqDqj3BH3jWhRP6udic
+Content-Type: application/json
+
+{
+  "weekDay": "domingo",
+  "startTime": 15,
+  "endTime": 22,
+  "bandId": "fe40df38-2f9a-4f5e-b34b-df469f2aaf26"
+}
+
+
+### Show day ###
+GET http://localhost:3003/band/showsday/sexta
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTEwNTcwOCwiZXhwIjoxNjc5MTA5MzA4fQ.hwepBBMJj11ccLkA6U4S9VK2FqDqj3BH3jWhRP6udic
+
+
+### create ticket
+POST http://localhost:3003/band/createticket
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTEwNTcwOCwiZXhwIjoxNjc5MTA5MzA4fQ.hwepBBMJj11ccLkA6U4S9VK2FqDqj3BH3jWhRP6udic
+Content-Type: application/json
+
+{
+  "name": "Band Concert CBJR",
+  "value": 150,
+  "eventId": "62a6009b-7eaf-458b-950c-c2e2e5939157",
+  "qtyStock":500
+}
+
+
+
+############ sale
+POST http://localhost:3003/band/ticketsale/15f493c6-fa2d-45ea-9521-4aa980e31149
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTEwNTcwOCwiZXhwIjoxNjc5MTA5MzA4fQ.hwepBBMJj11ccLkA6U4S9VK2FqDqj3BH3jWhRP6udic
+Content-Type: application/json
+
+{
+   "qty":5
+}
+
+
+
+############ Add photo
+POST http://localhost:3003/band/gallery
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTEwNTcwOCwiZXhwIjoxNjc5MTA5MzA4fQ.hwepBBMJj11ccLkA6U4S9VK2FqDqj3BH3jWhRP6udic
+Content-Type: application/json
+
+{
+   "linkPhoto": "https://jornaldagenetwe.tuddsoeste.com.br/wp-content/files/sites/7/2020/04/capital-dv.jpg",
+    "eventId":"62a6009b-7eaf-458b-950c-c2e2e5939157"
+}
+
+### get Gallery ###
+GET http://localhost:3003/band/gallery/15f493c6-fa2d-45ea-9521-4aa980e31149
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjhlOWIyZTY0LTM4ZjQtNDk0Zi05M2U2LTE0MjA2NjgwNGE3ZSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTY3OTEwNTcwOCwiZXhwIjoxNjc5MTA5MzA4fQ.hwepBBMJj11ccLkA6U4S9VK2FqDqj3BH3jWhRP6udic
